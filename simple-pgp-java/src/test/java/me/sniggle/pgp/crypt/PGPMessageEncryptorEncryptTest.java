@@ -50,7 +50,7 @@ public class PGPMessageEncryptorEncryptTest {
     return Arrays.asList( new Object[][] {
 //        { "public-key.asc", "private-key.asc", "code4shrini@gmail.com", "test-message.txt" },
       //  { "testcase-2-pub.asc", "testcase-2-sec.asc", "testcase-2@sniggleme.info", "test-message.txt" },
-        { "testcase-4-pub.asc", "testcase-4-sec.asc", "pgp-keypair-test4", "test-message.txt" }
+        { "testcase-4-pub.asc", "testcase-4-sec.asc", "pgp-keypair-test4", "vss-a.json" }
     });
   }
 
@@ -58,6 +58,7 @@ public class PGPMessageEncryptorEncryptTest {
   public void setUp() throws Exception {
     messageEncryptor = PGPWrapperFactory.getEncyptor();
   }
+/*
 
   @Test
   public void testEncrypt() throws IOException {
@@ -78,31 +79,14 @@ public class PGPMessageEncryptorEncryptTest {
     }
     assertEquals(mesg, new String(plainResult.toByteArray()));
   }
+*/
 
   @Test
   public void testEncryptAndSign() throws FileNotFoundException {
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-   /* assertTrue(messageEncryptor.encrypt(
-        getClass().getResourceAsStream(publicKeyFilename),
-        getClass().getResourceAsStream(privateKeyFilename),
-        userId,
-        "testpassword",
-        "vss-a.json",
-        getClass().getResourceAsStream(plainDataFilename),
-        baos
-    ));
-    ByteArrayOutputStream plainText = new ByteArrayOutputStream();
-    assertTrue(messageEncryptor.decrypt(
-        "testpassword",
-        getClass().getResourceAsStream(privateKeyFilename),
-        getClass().getResourceAsStream(publicKeyFilename),
-        new ByteArrayInputStream(baos.toByteArray()),
-        plainText
-    ));*/
-    try //(OutputStream outputStream = new FileOutputStream(plainDataFilename+".2.gpg"))
+    ByteArrayOutputStream plainResult= new ByteArrayOutputStream();
+    try
     {
-     // baos.writeTo(outputStream);
-  //    mesg= new String(baos.toByteArray());
       mesg = readFile("vss-a.json", StandardCharsets.UTF_8);
      // System.out.println(mesg);
       assertTrue( messageEncryptor.encrypt(
@@ -120,9 +104,6 @@ public class PGPMessageEncryptorEncryptTest {
       JSONObject jo= new JSONObject();
       jo.put("vehicleData",base64encodedpayload);
       System.out.println(jo.toString());
-     // String encryptedpayload = new String(Base64.getDecoder().decode(base64encodedpayload));
-   //  String plaintextpayload =
-     // System.out.println(encryptedpayload);
     }
     catch (IOException ioe)
     {
@@ -132,7 +113,9 @@ public class PGPMessageEncryptorEncryptTest {
     {
       LOGGER.error("{}", je.getMessage());
     }
-   //assertEquals(mesg, new String(plainText.toByteArray()));
+    assertTrue(messageEncryptor.decrypt("testpassword", getClass().getResourceAsStream(privateKeyFilename), new ByteArrayInputStream(baos.toByteArray()), plainResult));
+
+    assertEquals(mesg, new String(plainResult.toByteArray()));
   }
   static String readFile(String path, Charset encoding)
           throws IOException
