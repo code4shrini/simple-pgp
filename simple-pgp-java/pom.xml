@@ -35,8 +35,8 @@
     </dependency>
     <dependency>
       <groupId>org.bouncycastle</groupId>
-      <artifactId>bcpg-jdk15on</artifactId>
-      <version>1.52</version>
+      <artifactId>bcpg-jdk18on</artifactId>
+      <version>1.77</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -46,5 +46,11 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>
+      <dependency>
+          <groupId>com.vaadin.external.google</groupId>
+          <artifactId>android-json</artifactId>
+          <version>0.0.20131108.vaadin1</version>
+          <scope>test</scope>
+      </dependency>
   </dependencies>
 </project>

@@ -63,7 +63,7 @@ public class PGPMessageEncryptor extends BasePGPCommon implements MessageEncrypt
 
       if (signingKey != null) {
         LOGGER.info("Preparing message signing");
-        pgpSignatureGenerator = new PGPSignatureGenerator(new BcPGPContentSignerBuilder(signingKey.getPublicKeyPacket().getAlgorithm(), HashAlgorithmTags.SHA256));
+        pgpSignatureGenerator = new PGPSignatureGenerator(new BcPGPContentSignerBuilder(signingKey.getPublicKeyPacket().getAlgorithm(), HashAlgorithmTags.SHA3_512));
         pgpSignatureGenerator.init(PGPSignature.BINARY_DOCUMENT, signingKey);
         pgpSignatureGenerator.generateOnePassVersion(false).encode(compressedDataStream);
       } else {

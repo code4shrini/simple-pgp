@@ -126,7 +126,7 @@ public class PGPKeyPairGenerator extends BaseKeyPairGenerator {
       PGPSecretKeyRingCollection secretKeyRingCollection = new PGPSecretKeyRingCollection(Arrays.asList(secretKeyRing));
       LOGGER.info("Saving secret key ring to secret key target");
       secretKeyRingCollection.encode(targetStream);
-    } catch (IOException | PGPException e) {
+    } catch (IOException  e) {
       LOGGER.error("{}", e.getMessage());
       result &= false;
     }

@@ -37,8 +37,10 @@ public class PGPMessageSignerVerifyTest {
     return Arrays.asList(new Object[][]{
         {"testcase-1-pub.asc", "test-message.txt", "test-message.txt.tc1.sig", true},
         {"testcase-2-pub.asc", "test-message.txt", "test-message.txt.tc2.sig", true},
+        {"public-key.asc", "test-message.txt", "test-message.txt.sig", true},
         {"testcase-1-pub.asc", "test-message.txt", "test-message.txt.tc2.sig", false},
-        {"testcase-2-pub.asc", "test-message.txt", "test-message.txt.tc1.sig", false}
+        {"testcase-2-pub.asc", "test-message.txt", "test-message.txt.sig", false},
+        {"public-key.asc", "test-message.txt", "test-message.txt.tc2.sig", false}
     });
   }
 
